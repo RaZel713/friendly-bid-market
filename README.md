@@ -2,7 +2,7 @@
 
 페이지 링크: https://friendly-bid-market.lovable.app/
 
-BidBuddy의 핵심 경쟁력은?
+# BidBuddy의 핵심 경쟁력은?
 
 “당근마켓의 수동 거래 경험을, 경매 흐름과 시스템화된 규칙으로 자동화하고 신뢰도를 높인 것”
 
