@@ -1,73 +1,155 @@
-# Welcome to your Lovable project
+# 중고 거래 플랫폼 Bid Buddy
 
-## Project info
+페이지 링크: https://friendly-bid-market.lovable.app/
 
-**URL**: https://lovable.dev/projects/c95877cf-eaf8-4465-8f7d-6b3403d28c68
+# 🎨 BidBuddy 디자인 & 기능 명세서
 
-## How can I edit this code?
+## 🔖 1. 프로젝트 개요
 
-There are several ways of editing your application.
+- **서비스명**: BidBuddy
+- **목표**: 협상 없이 간편한 중고 거래 경험 제공
+- **핵심 컨셉**
+  - 협상 NO, 입찰 YES
+  - 3시간 자동 경매 흐름
+  - 초보자도 쉽게 참여 가능한 입찰 UI
+  - 신뢰 기반 후기 & 등급 시스템
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c95877cf-eaf8-4465-8f7d-6b3403d28c68) and start prompting.
+## 🖤 2. 전체 톤 & 무드
 
-Changes made via Lovable will be committed automatically to this repo.
+- **색감**: 무채색 중심 (`#000000`, `#ffffff`, `#f5f5f5`, `#e0e0e0`)
+- **느낌**: 신뢰, 직관, 안정성
+- **특징 요소**
+  - 지역 인증 배지
+  - 사용자 등급 뱃지
+  - 후기 카드 노출
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 📄 3. 화면 플로우
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+[메인 페이지]
+ ├─ 서비스 소개
+ ├─ 기능 미리보기 카드
+ └─ "경매 체험해보기" 버튼
+       ↓
+[경매 체험 페이지]
+ ├─ 모의 상품 정보
+ ├─ 입찰 영역
+ └─ 자동 채팅 연결 시뮬레이션
+       ↓
+[낙찰자 채팅 화면]
+ └─ 1:1 대화 + 거래 방식 선택
+       ↓
+[마이페이지]
+ └─ 프로필 / 거래 내역 / 후기 / 설정
 ```
 
-**Edit a file directly in GitHub**
+---
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🧱 4. 주요 UI 구조 요약
 
-**Use GitHub Codespaces**
+### 🔲 헤더
+```
+[ BidBuddy 로고 ]                            [ 라젤님 ⏷ ]
+→ 클릭 시: [ 내 정보 ] / [ 로그아웃 ]
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### 📣 메인 소개
+```
+"BidBuddy - 협상 없는 중고 경매 플랫폼"
+✔️ 3시간 제한 경매
+✔️ 최고가 자동 채팅
+✔️ 초보자 모드
+✔️ 등급·지역 인증 표시
+```
 
-## What technologies are used for this project?
+### 🧪 경매 체험
+- 예시 상품 정보 + 입찰 영역
+- 희망가 vs 현재가 비교
+- 초보자 안내 툴팁
+- 마감 후 채팅 연결 시뮬레이션
 
-This project is built with:
+### 💬 채팅
+- 상품 정보 + 낙찰가 상단 표시
+- 1:1 채팅 내역 + 입력창
+- 거래 방식(직거래/택배) 선택 가능
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### 🙋 마이페이지
+- 프로필 카드 (등급/후기/거래 수 요약)
+- 내가 등록/입찰한 상품 리스트
+- 후기 탭 (받은 후기 / 남긴 후기)
+- 설정 메뉴 (알림, 계정 관리)
 
-## How can I deploy this project?
+---
 
-Simply open [Lovable](https://lovable.dev/projects/c95877cf-eaf8-4465-8f7d-6b3403d28c68) and click on Share -> Publish.
+## ⚙️ 5. 기능 요구사항 요약
 
-## Can I connect a custom domain to my Lovable project?
+### 5.1 사용자 관리
+- 휴대폰 인증 로그인 (테스트 계정 제공)
+- 지역 인증 뱃지 + 필터링
+- 판매자 등급: 브론즈/실버/골드
+- 별점 및 후기 시스템
+- 사용자 신고/차단 기능
 
-Yes, you can!
+### 5.2 상품 등록
+- 필수 정보: 제목, 설명, 이미지, 시작가 등
+- 카테고리별 상세 항목
+- 경매 기간: 3시간 고정
+- 즉시구매가 도달 시 자동 낙찰
+- 등록 후 수정 불가
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### 5.3 입찰 시스템
+- 실시간 익명 입찰 (입찰자 일부 가림)
+- 입찰 단위: 금액대별 자동 설정
+- 입찰 취소 불가
+- 희망가 vs 현재가 시각화
+- 알림 기능 (경쟁 발생, 마감 등)
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+### 5.4 낙찰 이후 흐름
+- 낙찰 시 1:1 자동 채팅 연결
+- 채팅 유효 시간: 24시간
+- 거래 방식 협의 가능
+- BidBuddy는 결제/배송 미개입
+
+### 5.5 마이페이지
+- 프로필 커스터마이징 (닉네임, 이미지 등)
+- 등급, 후기, 거래 이력 요약
+- 즐겨찾기 / 알림 설정
+- 후기 탭 전환
+- 로그인 정보 변경, 탈퇴 기능
+
+### 5.6 초보자 모드
+- 희망 낙찰가 설정
+- 입찰가 차이 시각화
+- 입찰 단계별 툴팁 + 용어 팝업
+- 추천 입찰가 제안
+- 입찰 시뮬레이션 제공
+
+---
+
+## 👤 6. 사용자 페르소나 기반 시나리오
+
+### ✅ 유진 (22세, 대학생)
+- 네고 없는 판매 선호 → 경매 선호
+- 자동 채팅 연결로 33만 원 거래 성사
+- 누적 거래로 실버 등급 획득
+
+### ✅ 미나 (29세, 피규어 수집가)
+- 리미티드 상품 판매자
+- 관심 키워드 알림 기능 활용
+- 17.2만 원 낙찰로 안전 거래
+
+### ✅ 수진 (43세, 중고 초보 주부)
+- 희망가 비교, 입찰 시뮬로 입문
+- 첫 입찰 성공 + 후기 작성 경험
+
+---
+
+## ✅ 공통 인수 조건 (Acceptance Criteria)
+
+- 사용자가 상품 등록 또는 입찰 참여
+- 경매 종료 또는 즉시구매가 도달 시
+- 최고 입찰자와 자동 채팅방 생성 및 거래 흐름 안내
