@@ -63,56 +63,11 @@ const AuctionDemo = () => {
       <div className="min-h-screen bg-gray-50">
         <Header />
         <div className="container mx-auto px-4 py-8 max-w-2xl">
-          <Card className="border-green-200 bg-green-50 relative overflow-hidden">
-            {/* Tiger Character Animation */}
-            <div className="absolute top-4 right-4 z-10">
-              <div className="tiger-character animate-bounce">
-                <div className="relative w-16 h-16">
-                  {/* Tiger Body */}
-                  <div className="absolute inset-0 bg-orange-400 rounded-full border-2 border-orange-600">
-                    {/* Tiger Stripes */}
-                    <div className="absolute top-2 left-2 w-2 h-1 bg-orange-800 rounded-full transform rotate-12"></div>
-                    <div className="absolute top-3 right-2 w-2 h-1 bg-orange-800 rounded-full transform -rotate-12"></div>
-                    <div className="absolute bottom-3 left-3 w-1 h-2 bg-orange-800 rounded-full transform rotate-45"></div>
-                  </div>
-                  
-                  {/* Tiger Ears */}
-                  <div className="absolute -top-2 left-3 w-3 h-3 bg-orange-400 rounded-full border border-orange-600 transform rotate-12"></div>
-                  <div className="absolute -top-2 right-3 w-3 h-3 bg-orange-400 rounded-full border border-orange-600 transform -rotate-12"></div>
-                  
-                  {/* Tiger Face */}
-                  <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-                    {/* Eyes */}
-                    <div className="flex space-x-2 mb-1">
-                      <div className="w-1.5 h-1.5 bg-black rounded-full animate-pulse"></div>
-                      <div className="w-1.5 h-1.5 bg-black rounded-full animate-pulse"></div>
-                    </div>
-                    {/* Nose */}
-                    <div className="w-1 h-1 bg-pink-400 rounded-full mx-auto mb-1"></div>
-                    {/* Mouth - Happy Expression */}
-                    <div className="w-3 h-1 border-b-2 border-black rounded-full"></div>
-                  </div>
-                  
-                  {/* Gavel in Tiger's Hand */}
-                  <div className="absolute bottom-0 right-0 gavel-animation">
-                    <div className="w-4 h-6 relative">
-                      {/* Gavel Handle */}
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-4 bg-amber-700 rounded-full"></div>
-                      {/* Gavel Head */}
-                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-3 h-2 bg-amber-800 rounded-sm"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <CardHeader className="text-center pt-8">
-              <CardTitle className="text-2xl text-green-800 flex items-center justify-center gap-2">
-                🎉 경매 종료!
-                <span className="text-sm font-normal text-green-600">낙찰 성공!</span>
-              </CardTitle>
+          <Card className="border-green-200 bg-green-50">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl text-green-800">🎉 경매 종료!</CardTitle>
               <CardDescription className="text-green-600">
-                축하합니다! 믿고에서 첫 거래를 성공하셨습니다.
+                축하합니다! 낙찰에 성공하셨습니다.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -140,31 +95,6 @@ const AuctionDemo = () => {
             </CardContent>
           </Card>
         </div>
-        
-        {/* CSS Styles for Tiger Animation */}
-        <style jsx>{`
-          .tiger-character {
-            animation: celebrate 2s ease-in-out infinite;
-          }
-          
-          .gavel-animation {
-            animation: gavel-tap 0.8s ease-in-out infinite;
-            transform-origin: bottom center;
-          }
-          
-          @keyframes celebrate {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-4px) rotate(-2deg); }
-            50% { transform: translateY(-8px) rotate(0deg); }
-            75% { transform: translateY(-4px) rotate(2deg); }
-          }
-          
-          @keyframes gavel-tap {
-            0%, 100% { transform: rotate(0deg); }
-            30% { transform: rotate(-15deg); }
-            60% { transform: rotate(5deg); }
-          }
-        `}</style>
       </div>
     );
   }
