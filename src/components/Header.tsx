@@ -1,106 +1,150 @@
 
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { User, ChevronDown } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useNavigate } from "react-router-dom";
-import { User, LogOut } from "lucide-react";
 
 const Header = () => {
-  const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // 임시로 로그인 상태로 설정
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLoginDialog, setShowLoginDialog] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [isCodeSent, setIsCodeSent] = useState(false);
 
-  const handleLogoClick = () => {
-    navigate('/');
+  const handleLogin = () => {
+    // 테스트용 로그인 (실제로는 인증 처리)
+    if (phoneNumber === '010-1234-5678' && verificationCode === '1234') {
+      setIsLoggedIn(true);
+      setShowLoginDialog(false);
+      setPhoneNumber('');
+      setVerificationCode('');
+      setIsCodeSent(false);
+    }
   };
 
-  const handleMyPageClick = () => {
-    navigate('/my-page');
+  const handleSendCode = () => {
+    if (phoneNumber) {
+      setIsCodeSent(true);
+    }
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    navigate('/');
+  };
+
+  const handleMyPage = () => {
+    navigate('/my-page');
   };
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <header className="bg-white border-b border-gray-200">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+        {/* Logo */}
         <div 
-          className="flex items-center space-x-2 cursor-pointer"
-          onClick={handleLogoClick}
+          className="text-2xl font-bold text-black cursor-pointer"
+          onClick={() => navigate('/')}
         >
-          <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-sm">B</span>
-          </div>
-          <span className="text-xl font-bold text-black">BidBuddy</span>
+          믿고
         </div>
-        
-        {isLoggedIn ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white">
-                라젤님 ⏷
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuItem onClick={handleMyPageClick}>
-                <User className="w-4 h-4 mr-2" />
-                내 정보
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleLogout}>
-                <LogOut className="w-4 h-4 mr-2" />
-                로그아웃
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <Dialog open={isLoginOpen} onOpenChange={setIsLoginOpen}>
-            <DialogTrigger asChild>
-              <Button variant="outline" className="border-black text-black hover:bg-black hover:text-white">
-                로그인
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-md">
-              <DialogHeader>
-                <DialogTitle>로그인</DialogTitle>
-              </DialogHeader>
-              <div className="space-y-4 py-4">
-                <div className="space-y-2">
-                  <Label htmlFor="phone">휴대폰 번호</Label>
-                  <Input id="phone" placeholder="010-0000-0000" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="verification">인증번호</Label>
-                  <div className="flex space-x-2">
-                    <Input id="verification" placeholder="인증번호 입력" />
-                    <Button variant="outline" size="sm">
-                      인증번호 요청
-                    </Button>
-                  </div>
-                </div>
-                <Button 
-                  className="w-full bg-black text-white hover:bg-gray-800"
-                  onClick={() => {
-                    setIsLoggedIn(true);
-                    setIsLoginOpen(false);
-                  }}
-                >
-                  로그인하기
+
+        {/* User Menu */}
+        <div className="flex items-center space-x-4">
+          {isLoggedIn ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="flex items-center space-x-2">
+                  <User className="w-4 h-4" />
+                  <span>라젤님</span>
+                  <ChevronDown className="w-4 h-4" />
                 </Button>
-                <div className="text-center text-sm text-gray-600">
-                  계정이 없으신가요?{' '}
-                  <button className="text-black font-medium hover:underline">
-                    회원가입하기
-                  </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem onClick={handleMyPage}>
+                  내 정보
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={handleLogout}>
+                  로그아웃
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Dialog open={showLoginDialog} onOpenChange={setShowLoginDialog}>
+              <DialogTrigger asChild>
+                <Button variant="outline">로그인</Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle>믿고 로그인</DialogTitle>
+                  <DialogDescription>
+                    휴대폰 번호로 간편하게 로그인하세요
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4">
+                  <div>
+                    <Label htmlFor="phone">휴대폰 번호</Label>
+                    <div className="flex space-x-2">
+                      <Input
+                        id="phone"
+                        placeholder="010-1234-5678"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        className="flex-1"
+                      />
+                      <Button 
+                        onClick={handleSendCode}
+                        variant="outline"
+                        disabled={!phoneNumber}
+                      >
+                        {isCodeSent ? '재전송' : '인증요청'}
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  {isCodeSent && (
+                    <div>
+                      <Label htmlFor="code">인증번호</Label>
+                      <Input
+                        id="code"
+                        placeholder="1234"
+                        value={verificationCode}
+                        onChange={(e) => setVerificationCode(e.target.value)}
+                      />
+                    </div>
+                  )}
+                  
+                  <Button 
+                    onClick={handleLogin}
+                    className="w-full bg-black text-white hover:bg-gray-800"
+                    disabled={!phoneNumber || !verificationCode}
+                  >
+                    로그인
+                  </Button>
+                  
+                  <p className="text-sm text-gray-600 text-center">
+                    테스트 계정: 010-1234-5678, 인증번호: 1234
+                  </p>
                 </div>
-              </div>
-            </DialogContent>
-          </Dialog>
-        )}
+              </DialogContent>
+            </Dialog>
+          )}
+        </div>
       </div>
     </header>
   );
